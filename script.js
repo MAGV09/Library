@@ -12,6 +12,7 @@ const selectEl = document.querySelector('#select-el');
 
 const bookNum = document.querySelector('#bookNum-el');
 const completedBooks = document.querySelector('#completedBooks-el');
+const delAll = document.querySelector('#nuke');
 let num = 0;
 let completed = 0;
 let library = [];
@@ -131,6 +132,16 @@ dialog.addEventListener('close', () => {
   console.log(library);
 });
 displayBooks(library);
+
+delAll.addEventListener('click', () => {
+  const allBooks = document.querySelectorAll('div[data-group=book]');
+  allBooks.forEach((bookCard) => bookCard.remove());
+  library = [];
+  num = 0;
+  completed = 0;
+  bookNum.textContent = `Books Num:${num}`;
+  completedBooks.textContent = `Completed:${completed}`;
+});
 // function reset(books) {
 //   books.forEach((book) => {
 //     book.remove();
