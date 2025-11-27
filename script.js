@@ -13,7 +13,7 @@ const selectEl = document.querySelector('#select-el');
 const bookNum = document.querySelector('#bookNum-el');
 const completedBooks = document.querySelector('#completedBooks-el');
 const delAll = document.querySelector('#nuke');
-const searchInput = document.querySelector('#search')
+const searchInput = document.querySelector('#search');
 let num = 0;
 let completed = 0;
 let library = [];
@@ -60,23 +60,17 @@ function createBookCard() {
 }
 
 function displayBooks(libraryArr) {
-  // const allBooks = document.querySelectorAll('.bookCard-Container');
-
   libraryArr.forEach((book) => {
-    // if (allBooks) {
-    //   if(allBooks.some((div) => div.dataset.id === book.id)){
-    //     console.log('oi');
-    //   }
-
-    // }
     const bookCard = createBookCard();
-    bookCard.div.classList.add('bookCard-Container') ;
+    bookCard.div.classList.add('bookCard-Container');
     bookCard.div.setAttribute('data-group', 'book');
     bookCard.div.setAttribute('data-id', book.id);
     bookCard.div.setAttribute('data-title', book.title);
+
     bookCard.h1.textContent = book.title;
     bookCard.h2.textContent = `by ${book.author}`;
     bookCard.span.textContent = `${book.pages}, ${book.isRead}`;
+
     bookCard.btn1.textContent = book.isRead;
     bookCard.btn2.textContent = 'Delete';
     bookCard.btn2.setAttribute('id', 'del-btn');
@@ -92,6 +86,7 @@ function displayBooks(libraryArr) {
         completedBooks.textContent = `Completed:${completed}`;
       }
     });
+
     if (book.isRead === 'Read') {
       completed++;
     }
@@ -116,6 +111,7 @@ function displayBooks(libraryArr) {
 addBook.addEventListener('click', () => {
   dialog.showModal();
 });
+
 dialog.addEventListener('close', () => {
   if (dialog.returnValue === 'confirm') {
     const title = titleEl.value;
@@ -133,6 +129,7 @@ dialog.addEventListener('close', () => {
   selectEl.value = 'default';
   console.log(library);
 });
+
 displayBooks(library);
 
 delAll.addEventListener('click', () => {
@@ -148,10 +145,10 @@ delAll.addEventListener('click', () => {
 searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value.toLowerCase();
   const allBooks = document.querySelectorAll('div[data-group=book]');
-  
-  allBooks.forEach(bookCard => {
+
+  allBooks.forEach((bookCard) => {
     const title = bookCard.dataset.title.toLowerCase();
-    
+
     if (searchTerm === '' || title.includes(searchTerm)) {
       bookCard.classList.remove('hide');
     } else {
@@ -159,23 +156,3 @@ searchInput.addEventListener('input', () => {
     }
   });
 });
-// function reset(books) {
-//   books.forEach((book) => {
-//     book.remove();
-//   });
-// }
-// function deleteBook() {
-//   let delBtns = document.querySelectorAll('#del-btn');
-//   delBtns.forEach((btn) =>
-//     btn.addEventListener('click', () => {
-//       const id = btn.dataset.id;
-//        library = library.filter((book) => book.id !== id);
-//       const div = document.querySelector(`div[data-id =${id}]`);
-//       div.remove();
-//       // const allBooks = document.querySelectorAll('.bookCard-Container');
-//       // library
-//       // displayBooks(newLibrary);
-//     })
-//   );
-// }
-// deleteBook()
