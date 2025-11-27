@@ -28,8 +28,11 @@ function Book(id, title, author, pages, isRead) {
     (this.isRead = isRead);
 }
 
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
+Book.prototype.toggleRead = function () {
+      this.isRead = this.isRead === 'Read' ? 'not Read' : 'Read';
+
+  // return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
+
 };
 
 function createBooks(title, author, pages, isRead) {
@@ -39,6 +42,7 @@ function createBooks(title, author, pages, isRead) {
   return book;
 }
 
+//intialize 2 books
 createBooks('Atomic Habits', 'James Clear', 320, 'not Read');
 createBooks("Can't Hurt me", 'David Goggins', 220, 'Read');
 
@@ -92,7 +96,7 @@ function displayBooks(libraryArr) {
     }
 
     bookCard.btn1.addEventListener('click', () => {
-      book.isRead = book.isRead === 'Read' ? 'not Read' : 'Read';
+      book.toggleRead()
       bookCard.span.textContent = `${book.pages}, ${book.isRead}`;
       bookCard.btn1.textContent = book.isRead;
       if (book.isRead === 'Read') {
@@ -118,7 +122,6 @@ dialog.addEventListener('close', () => {
     const author = authorEl.value;
     const pages = pagesEl.value;
     const isRead = selectEl.value;
-    // const allBooks = document.querySelectorAll('.bookCard-Container');
     const newBook = createBooks(title, author, pages, isRead);
     const newLibrary = library.filter((book) => book.id === newBook.id);
     displayBooks(newLibrary);
@@ -130,6 +133,7 @@ dialog.addEventListener('close', () => {
   console.log(library);
 });
 
+//inital display
 displayBooks(library);
 
 delAll.addEventListener('click', () => {
