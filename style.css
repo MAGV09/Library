@@ -65,6 +65,7 @@ body {
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 1fr 6fr;
   gap: 0.5rem;
+  background-color: #ffffff;
 }
 .container > * {
   border: 3px solid grey;
@@ -104,6 +105,10 @@ main > div {
   text-align: center;
   display: flex;
   flex-direction: column;
+  background-color: #fafafa;
+  color: #1f2937;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding-top: 1rem;
 }
 .bookCard-Container > div {
   margin-top: auto;
@@ -135,6 +140,7 @@ input[type='search'] {
   border: none;
   border-bottom: 1px solid grey;
   padding: 1rem;
+  background-color: #ffffff;
 }
 form button {
   width: 100px;
@@ -167,6 +173,44 @@ h2 {
   font-weight: 500;
 }
 
-.hide{
+.hide {
   display: none;
+}
+button:hover {
+  background-color: #4f46e5;
+}
+button {
+  background-color: #6366f1;
+  color: #1f2937;
+}
+aside button{
+  background-color: red;
+  border-radius: 0.5rem;
+}
+aside button:hover{
+  background-color: rgb(207, 0, 0);
+}
+::backdrop {
+  background-color: #1f2937;
+  opacity: 0.3;
+}
+
+dialog {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out,
+    overlay 0.2s ease-out allow-discrete, display 0.2s ease-out allow-discrete;
+}
+
+dialog[open] {
+  opacity: 1;
+  transform: scale(1);
+  transform: all 0.4s;
+}
+
+@starting-style {
+  dialog[open] {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 }

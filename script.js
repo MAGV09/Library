@@ -70,7 +70,7 @@ function displayBooks(libraryArr) {
 
     // }
     const bookCard = createBookCard();
-    bookCard.div.classList = 'bookCard-Container';
+    bookCard.div.classList.add('bookCard-Container') ;
     bookCard.div.setAttribute('data-group', 'book');
     bookCard.div.setAttribute('data-id', book.id);
     bookCard.div.setAttribute('data-title', book.title);
