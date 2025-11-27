@@ -14,7 +14,7 @@
   <body>
     <div class="container" id="container-el">
       <header>
-        <img src="./imgs/logo.jpg" alt="library logo" class="logo">
+        <img src="./imgs/logo.jpg" alt="library logo" class="logo" />
         <div>
           <form action="">
             <input type="search" placeholder="Search a Book" id="search" />
@@ -23,21 +23,51 @@
       </header>
 
       <main>
+        <div class="addBook" id="addBook-el">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <title>plus</title>
+            <path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+          </svg>
+        </div>
+        <dialog>
+          <form method="dialog">
+            <!-- <div>
+              <input type="url" placeholder="image-link (optional)" id="img-el">
+            </div> -->
+            <div>
+              <input type="text" placeholder="Title" id="title-el" />
+            </div>
 
+            <div>
+              <input type="text" placeholder="Author" id="author-el" />
+            </div>
+
+            <div>
+              <input type="tel" placeholder="Pages"  id="pages-el"/>
+            </div>
+
+            <div>
+              <select name="select" id="select-el">
+                <option value="default">Status</option>
+                <option value="read">Read</option>
+                <option value="not read">not Read</option>
+              </select>
+            </div>
+            <div class="dialog-btn-container">
+              <button value="cancel" formmethod="dialog">Cancel</button>
+              <button id="confirmBtn" value="confirm">Confirm</button>
+            </div>
+          </form>
+        </dialog>
       </main>
       <aside>
-         <div >
+        <div>
           <h1>Library Information</h1>
           <p>Books Num:</p>
           <p>Completed:</p>
-         </div>
-         <div>
-          <h1>Book Information</h1>
-          <h2>Title</h2>
-          <h3>Author</h3>
-          <span>Pages, Read</span>
-         </div>
-         <button>Delete All</button>
+        </div>
+       
+        <button>Delete All</button>
       </aside>
     </div>
     <script src="./script.js"></script>
