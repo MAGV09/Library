@@ -13,6 +13,7 @@ const selectEl = document.querySelector('#select-el');
 const bookNum = document.querySelector('#bookNum-el');
 const completedBooks = document.querySelector('#completedBooks-el');
 const delAll = document.querySelector('#nuke');
+const searchInput = document.querySelector('#search')
 let num = 0;
 let completed = 0;
 let library = [];
@@ -72,6 +73,7 @@ function displayBooks(libraryArr) {
     bookCard.div.classList = 'bookCard-Container';
     bookCard.div.setAttribute('data-group', 'book');
     bookCard.div.setAttribute('data-id', book.id);
+    bookCard.div.setAttribute('data-title', book.title);
     bookCard.h1.textContent = book.title;
     bookCard.h2.textContent = `by ${book.author}`;
     bookCard.span.textContent = `${book.pages}, ${book.isRead}`;
@@ -141,6 +143,21 @@ delAll.addEventListener('click', () => {
   completed = 0;
   bookNum.textContent = `Books Num:${num}`;
   completedBooks.textContent = `Completed:${completed}`;
+});
+
+searchInput.addEventListener('input', () => {
+  const searchTerm = searchInput.value.toLowerCase();
+  const allBooks = document.querySelectorAll('div[data-group=book]');
+  
+  allBooks.forEach(bookCard => {
+    const title = bookCard.dataset.title.toLowerCase();
+    
+    if (searchTerm === '' || title.includes(searchTerm)) {
+      bookCard.classList.remove('hide');
+    } else {
+      bookCard.classList.add('hide');
+    }
+  });
 });
 // function reset(books) {
 //   books.forEach((book) => {
