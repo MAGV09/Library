@@ -10,6 +10,10 @@ const authorEl = document.querySelector('#author-el');
 const pagesEl = document.querySelector('#pages-el');
 const selectEl = document.querySelector('#select-el');
 
+const bookNum = document.querySelector('#bookNum-el');
+const completedBooks = document.querySelector('#completedBooks-el');
+let num = 0;
+let completed = 0;
 let library = [];
 function Book(id, title, author, pages, isRead) {
   if (!new.target) {
@@ -33,8 +37,8 @@ function createBooks(title, author, pages, isRead) {
   return book;
 }
 
-createBooks('Atomic Habits', 'James Clear', 320, 'not read');
-createBooks("Can't Hurt me", 'David Goggins', 220, 'read');
+createBooks('Atomic Habits', 'James Clear', 320, 'not Read');
+createBooks("Can't Hurt me", 'David Goggins', 220, 'Read');
 
 function createBookCard() {
   const div = document.createElement('div');
@@ -53,10 +57,10 @@ function createBookCard() {
   return { div, h1, h2, span, btnDiv, btn1, btn2 };
 }
 
-function displayBooks(library) {
+function displayBooks(libraryArr) {
   // const allBooks = document.querySelectorAll('.bookCard-Container');
 
-  library.forEach((book) => {
+  libraryArr.forEach((book) => {
     // if (allBooks) {
     //   if(allBooks.some((div) => div.dataset.id === book.id)){
     //     console.log('oi');
@@ -70,15 +74,40 @@ function displayBooks(library) {
     bookCard.h1.textContent = book.title;
     bookCard.h2.textContent = `by ${book.author}`;
     bookCard.span.textContent = `${book.pages}, ${book.isRead}`;
-    bookCard.btn1.textContent = 'Read';
+    bookCard.btn1.textContent = book.isRead;
     bookCard.btn2.textContent = 'Delete';
     bookCard.btn2.setAttribute('id', 'del-btn');
     bookCard.btn2.setAttribute('data-id', book.id);
-    bookCard.btn2.addEventListener('click',()=>{
-      bookCard.div.remove()
-      library = library.filter((books)=>books.id !==book.id)
-    })
+
+    bookCard.btn2.addEventListener('click', () => {
+      bookCard.div.remove();
+      library = library.filter((books) => books.id !== book.id);
+      num = library.length;
+      bookNum.textContent = `Books Num:${num}`;
+      if (book.isRead === 'Read') {
+        completed--;
+        completedBooks.textContent = `Completed:${completed}`;
+      }
+    });
+    if (book.isRead === 'Read') {
+      completed++;
+    }
+
+    bookCard.btn1.addEventListener('click', () => {
+      book.isRead = book.isRead === 'Read' ? 'not Read' : 'Read';
+      bookCard.span.textContent = `${book.pages}, ${book.isRead}`;
+      bookCard.btn1.textContent = book.isRead;
+      if (book.isRead === 'Read') {
+        completed++;
+      } else {
+        completed--;
+      }
+      completedBooks.textContent = `Completed:${completed}`;
+    });
   });
+  num = library.length;
+  bookNum.textContent = `Books Num:${num}`;
+  completedBooks.textContent = `Completed:${completed}`;
 }
 
 addBook.addEventListener('click', () => {
@@ -99,6 +128,7 @@ dialog.addEventListener('close', () => {
   authorEl.value = '';
   pagesEl.value = '';
   selectEl.value = 'default';
+  console.log(library);
 });
 displayBooks(library);
 // function reset(books) {
