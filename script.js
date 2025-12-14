@@ -17,23 +17,19 @@ const searchInput = document.querySelector('#search');
 let num = 0;
 let completed = 0;
 let library = [];
-function Book(id, title, author, pages, isRead) {
-  if (!new.target) {
-    throw Error("You must use the 'new' operator to call the constructor");
-  }
-  (this.id = id),
+class Book {
+//  
+constructor(id, title, author, pages, isRead){
+ (this.id = id),
     (this.title = title),
     (this.author = author),
     (this.pages = pages),
     (this.isRead = isRead);
 }
-
-Book.prototype.toggleRead = function () {
-      this.isRead = this.isRead === 'Read' ? 'not Read' : 'Read';
-
-  // return `${this.title} by ${this.author}, ${this.pages} pages, ${this.isRead}`;
-
-};
+ toggleRead(){
+ this.isRead = this.isRead === 'Read' ? 'not Read' : 'Read';
+ }
+}
 
 function createBooks(title, author, pages, isRead) {
   const id = crypto.randomUUID();
@@ -46,26 +42,30 @@ function createBooks(title, author, pages, isRead) {
 createBooks('Atomic Habits', 'James Clear', 320, 'not Read');
 createBooks("Can't Hurt me", 'David Goggins', 220, 'Read');
 
-function createBookCard() {
-  const div = document.createElement('div');
-  const h1 = document.createElement('h1');
-  const h2 = document.createElement('h2');
-  const span = document.createElement('span');
+class createBookCard{
+  div = document.createElement('div');
+  h1 = document.createElement('h1');
+  h2 = document.createElement('h2');
+  span = document.createElement('span');
 
-  const btnDiv = document.createElement('div');
-  const btn1 = document.createElement('button');
-  const btn2 = document.createElement('button');
+  btnDiv = document.createElement('div');
+  btn1 = document.createElement('button');
+  btn2 = document.createElement('button');
 
-  btnDiv.append(btn1, btn2);
-  div.append(h1, h2, span, btnDiv);
-  main.insertBefore(div, addBook);
+render() {
+    this.btnDiv.append(this.btn1, this.btn2);
+    this.div.append(this.h1, this.h2, this.span, this.btnDiv);
+    main.insertBefore(this.div, addBook);
+  }
 
-  return { div, h1, h2, span, btnDiv, btn1, btn2 };
+
+  
 }
 
 function displayBooks(libraryArr) {
   libraryArr.forEach((book) => {
-    const bookCard = createBookCard();
+    const bookCard = new createBookCard;
+    bookCard.render()
     bookCard.div.classList.add('bookCard-Container');
     bookCard.div.setAttribute('data-group', 'book');
     bookCard.div.setAttribute('data-id', book.id);
